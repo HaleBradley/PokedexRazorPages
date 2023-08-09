@@ -1,0 +1,61 @@
+﻿@page
+@model PokedexRazorPages.Pages.PokemonModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container text-center">
+    <h1>@Model.Name <span class="text-secondary">#@Model.Id</span></h1>
+    <div class="row">
+        <div class="col">
+            <img src="@Url.Content(Model.Image)" alt="@Model.Name" />
+        </div>
+        <div class="col">
+            <p>@Model.Description</p>
+            <!-- Start of card -->
+            <div class="card">
+                <div class="card-body bg-info">
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-white">Height</p>
+                            <p>@Model.Height</p>
+                        </div>
+                        <div class="col">
+                            <p class="text-white">Category</p>
+                            <p>@Model.Category</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-white">Weight</p>
+                            <p>@Model.Weight</p>
+                        </div>
+                        <div class="col">
+                            <p class="text-white">Abilities</p>
+                            @foreach (string ability in Model.Abilities) {
+                                <p class="d-inline">@ability</p>
+                            } 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-white">Gender</p>
+                            <p>@Model.Gender</p>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card -->
+            <h6>Type</h6>
+            @foreach (string type in Model.Types) {
+            <p class="d-inline">@type</p>
+            }
+            <h6>Weaknesses</h6>
+            @foreach (string weakness in Model.Weaknesses) {
+                <p class="d-inline">@weakness</p>
+            }
+        </div>
+    </div>
+</div>
