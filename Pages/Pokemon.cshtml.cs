@@ -17,7 +17,7 @@ namespace PokedexRazorPages.Pages
         public string[] Types { get; set; }
         public string[] Weaknesses { get; set; }
 
-        public void OnGet()
+        public void OnGet(string? mon)
         {
             Name = "Bulbasaur";
             Id = 0001;
