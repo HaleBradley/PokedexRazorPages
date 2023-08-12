@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PokedexRazorPages.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<PokedexRazorPagesContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PokedexRazorPagesContext") ?? throw new InvalidOperationException("Connection string 'PokedexRazorPagesContext' not found.")));
 
 var app = builder.Build();
 
