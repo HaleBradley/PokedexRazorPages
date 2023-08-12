@@ -14,6 +14,7 @@ namespace PokedexRazorPages.Data
         {
         }
 
+        public DbSet<Pokemon> Pokemons { get; set; }
         public DbSet<PokedexRazorPages.Models.Rating> Rating { get; set; } = default!;
     }
 }
