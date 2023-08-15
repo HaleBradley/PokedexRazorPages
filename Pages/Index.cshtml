@@ -12,51 +12,24 @@
     <!-- foreach loop to loop through each pokemon from database and place in a col -->
     <div class="row">
         <!-- four cols per row -->
-        <div class="col">
-            <!-- TODO: make card data dynamic -->
-            <div class="card" style="width: 18rem;">
-                <a asp-page="/Pokemon" asp-route-name="bulbasaur"><img src="~/images/bulbasaur.png" class="card-img-top" alt="Bulbasaur"></a>
-                <div class="card-body">
-                    <h5 class="card-title">Bulbasaur</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">#0001</h6>
-                    <p class="badge bg-success">Grass</p>
-                    <p class="badge" style="background-color: #800080;">Poison</p>
+        @foreach(var pokemon in Model.Pokemons)
+        {
+            <div class="col">
+                <!-- TODO: make card data dynamic -->
+                <div class="card" style="width: 18rem;">
+                    <a asp-page="/Pokemon" asp-route-name="@pokemon.Name"><img src="@Url.Content(pokemon.Sprites.Sprite.Art.Image)" class="card-img-top" alt="@pokemon.Name"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@pokemon.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">#@pokemon.Id</h6>
+                        @foreach (var typeObj in pokemon.Types)
+                        {
+                            <p class="badge bg-black">@typeObj.Type.Name</p>
+                        }
+                        
+                    </div>
                 </div>
             </div>
-            
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <a asp-page="/Pokemon" asp-route-name="ivysaur"><img src="~/images/ivysaur.png" class="card-img-top" alt="Ivysaur"></a>
-                <div class="card-body">
-                    <h5 class="card-title">Ivysaur</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">#0002</h6>
-                    <p class="badge bg-success">Grass</p>
-                    <p class="badge" style="background-color: #800080;">Poison</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <a asp-page="/Pokemon" asp-route-name="venusaur"><img src="~/images/venusaur.png" class="card-img-top" alt="Venusaur"></a>
-                <div class="card-body">
-                    <h5 class="card-title">Venusaur</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">#0003</h6>
-                    <p class="badge bg-success">Grass</p>
-                    <p class="badge" style="background-color: #800080;">Poison</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <a asp-page="/Pokemon" asp-route-name="charmander"><img src="~/images/charmander.png" class="card-img-top" alt="Charmander"></a>
-                <div class="card-body">
-                    <h5 class="card-title">Charmander</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">#0004</h6>
-                    <p class="badge bg-danger">Fire</p>
-                </div>
-            </div>
-        </div>
+        }
         <!-- End of row -->
     </div>
 </div>
