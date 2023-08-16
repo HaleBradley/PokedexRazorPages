@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using PokedexRazorPages.Data;
 using PokedexRazorPages.Models;
 
 namespace PokedexRazorPages.Services
@@ -38,10 +41,9 @@ namespace PokedexRazorPages.Services
                 throw new Exception($"Failed to fecth data from PokeAPI. Status Code: {response.StatusCode}");
             }
         }
-        //TODO: Get every pokemon not just first 20 (20 sent for each request)
         public async Task<List<string>> GetPokemonNamesList()
         {
-            string requestUrl = $"pokemon";
+            string requestUrl = $"pokemon?offset=0&limit=1281";
             Console.WriteLine("Request URL: " + requestUrl);
 
             HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
@@ -56,6 +58,26 @@ namespace PokedexRazorPages.Services
 
                 List<string> pokemonNames = listResponse.Results.Select(result => result.Name).ToList();
 
+                List<Pokemon> Pokemons = new List<Pokemon>();
+                foreach (string name in pokemonNames)
+                {
+                    Pokemon pokemonTemp = await GetPokemonData(name);
+                    Pokemons.Add(pokemonTemp);
+                }
+
+                var options = new DbContextOptionsBuilder<PokedexRazorPagesContext>()
+                    .UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = PokedexRazorPagesContext - dd0aa542 - 2af1 - 413f - af8a - 637efbe2af6d; Trusted_Connection = True; MultipleActiveResultSets = true")
+                    .Options;
+
+                using (var context = new PokedexRazorPagesContext(options))
+                {
+                    foreach (Pokemon pokemon in Pokemons)
+                    {
+                        context.Pokemons.Add(pokemon);
+                    }
+                }
+                
+
                 Console.WriteLine("Returning list of names");
                 return pokemonNames;
             }
@@ -64,6 +86,5 @@ namespace PokedexRazorPages.Services
                 throw new Exception($"Failed to fetch data from PokeAPI. Status Code: {response.StatusCode}");
             }
         }
-
     }
 }
