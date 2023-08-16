@@ -6,6 +6,8 @@ namespace PokedexRazorPages.Models
     {
         [JsonProperty("results")]
         public List<PokemonResult> Results { get; set; }
+        [JsonProperty("next")]
+        public string Next { get; set; }
     }
 
     public class PokemonResult
