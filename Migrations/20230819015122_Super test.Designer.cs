@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokedexRazorPages.Data;
 
@@ -10,9 +11,11 @@ using PokedexRazorPages.Data;
 namespace PokedexRazorPages.Migrations
 {
     [DbContext(typeof(PokedexRazorPagesContext))]
-    partial class PokedexRazorPagesContextModelSnapshot : ModelSnapshot
+    [Migration("20230819015122_Super test")]
+    partial class Supertest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,8 +42,6 @@ namespace PokedexRazorPages.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PokemonId");
 
                     b.ToTable("Abilities");
                 });
@@ -1543,17 +1544,6 @@ namespace PokedexRazorPages.Migrations
                     b.ToTable("Yellow");
                 });
 
-            modelBuilder.Entity("PokedexRazorPages.Models.Abilities", b =>
-                {
-                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
-                        .WithMany("Abilities")
-                        .HasForeignKey("PokemonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pokemon");
-                });
-
             modelBuilder.Entity("PokedexRazorPages.Models.Ability", b =>
                 {
                     b.HasOne("PokedexRazorPages.Models.Abilities", null)
@@ -2067,11 +2057,6 @@ namespace PokedexRazorPages.Migrations
                 {
                     b.Navigation("Generation")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PokedexRazorPages.Models.Pokemon", b =>
-                {
-                    b.Navigation("Abilities");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Sprites", b =>
