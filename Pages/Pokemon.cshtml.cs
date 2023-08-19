@@ -32,22 +32,22 @@ namespace PokedexRazorPages.Pages
             {
                 try
                 {
-                    Pokemon pokemonData = await _pokeApi.GetPokemonData(name);
-                    Id = pokemonData.Id;
-                    Name = pokemonData.Name;
-                    Height = pokemonData.Height;
-                    Weight = pokemonData.Weight;
-                    Abilities = new List<string>();
-                    foreach (var abilityObj in pokemonData.Abilities)
-                    {
-                        Abilities.Add(abilityObj.Ability.Name);
-                    }
-                    Image = pokemonData.Sprites.Sprite.Art.Image;
-                    Types = new List<string>();
-                    foreach (var typeObj in pokemonData.Types)
-                    {
-                        Types.Add(typeObj.Type.Name);
-                    }
+                    //Pokemon pokemonData = await _pokeApi.GetPokemonData(name);
+                    //Id = pokemonData.Id;
+                    //Name = pokemonData.Name;
+                    //Height = pokemonData.Height;
+                    //Weight = pokemonData.Weight;
+                    //Abilities = new List<string>();
+                    //foreach (var abilityObj in pokemonData.Abilities)
+                    //{
+                    //    Abilities.Add(abilityObj.Ability.Name);
+                    //}
+                    //Image = pokemonData.Sprites.Sprite.Art.Image;
+                    //Types = new List<string>();
+                    //foreach (var typeObj in pokemonData.Types)
+                    //{
+                    //    Types.Add(typeObj.Type.Name);
+                    //}
                 }
                 catch (Exception ex)
                 {

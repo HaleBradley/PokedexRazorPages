@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokedexRazorPages.Data;
 
@@ -10,9 +11,11 @@ using PokedexRazorPages.Data;
 namespace PokedexRazorPages.Migrations
 {
     [DbContext(typeof(PokedexRazorPagesContext))]
-    partial class PokedexRazorPagesContextModelSnapshot : ModelSnapshot
+    [Migration("20230819015619_Super test pt. 2")]
+    partial class Supertestpt2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
