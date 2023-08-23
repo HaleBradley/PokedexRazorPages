@@ -104,6 +104,14 @@ namespace PokedexRazorPages.Models
         public ICollection<Abilities> Abilities { get; set; }
         public ICollection<Forms> Forms { get; set; }
         public ICollection<Game_Indices> Game_Indices { get; set; }
+        public ICollection<Held_Items> Held_Items { get; set; }
+        public ICollection<Moves> Moves { get; set; }
+        public Species Species { get; set; }
+        public Sprites Sprites { get; set; }
+        public ICollection<Stats> Stats { get; set; }
+        public ICollection<Types> Types { get; set; }
+        public ICollection<PastTypes> PastTypes { get; set; }
+
     }
 
     public class Abilities
@@ -149,19 +157,19 @@ namespace PokedexRazorPages.Models
         public string Name { get; set; }
         public string Url { get; set; }
     }
-    //TODO KEEP CONNECTIONG TABLES
-    public class Held_Item
+    
+    public class Held_Items
     {
         public int Id { get; set; }
-        public int PokemonId { get; set; }
+        public Pokemon Pokemon { get; set; }
         public Item Item { get; set; }
-        public Version_Details Version_Details { get; set; }
+        public ICollection<Version_Details> Version_Details { get; set; }
     }
 
     public class Item
     {
         public int Id { get; set; }
-        public int Held_ItemId { get; set; }
+        public Held_Items Held_Items { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
     }
@@ -169,9 +177,17 @@ namespace PokedexRazorPages.Models
     public class Version_Details
     {
         public int Id { get; set; }
-        public int Held_ItemId { get; set; }
+        public Held_Items Held_Items { get; set; }
         public int Rarity { get; set; }
         public Version Version { get; set; }
+    }
+
+    public class ItemVersion
+    {
+        public int Id { get; set; }
+        public Version_Details Version_Details { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
     }
 
     public class Moves
@@ -179,13 +195,13 @@ namespace PokedexRazorPages.Models
         public int Id { get; set; }
         public int PokemonId { get; set; }
         public Move Move { get; set; }
-        public Version_Group_Details Version_Group_Details { get; set; }
+        public ICollection<Version_Group_Details> Version_Group_Details { get; set; }
     }
 
     public class Move
     {
         public int Id { get; set; }
-        public int MovesId { get; set; }
+        public Moves Moves { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
     }
@@ -193,7 +209,7 @@ namespace PokedexRazorPages.Models
     public class Version_Group_Details
     {
         public int Id { get; set; }
-        public int MovesId { get; set; }
+        public Moves Moves { get; set; }
         public string Level_Learned_At { get; set; }
         public Version_Group Version_Group { get; set; }
         public Move_Learn_Method Move_Learn_Method { get; set; }
@@ -202,7 +218,7 @@ namespace PokedexRazorPages.Models
     public class Version_Group
     {
         public int Id { get; set; }
-        public int Version_Group_DetailsId { get; set; }
+        public Version_Group_Details Version_Group_Details { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
     }
@@ -210,7 +226,7 @@ namespace PokedexRazorPages.Models
     public class Move_Learn_Method
     {
         public int Id { get; set; }
-        public int Version_Group_DetailsId { get; set; }
+        public Version_Group_Details Version_Group_Details { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
     }
@@ -218,7 +234,7 @@ namespace PokedexRazorPages.Models
     public class Species
     {
         public int Id { get; set; }
-        public int PokemonId { get; set; }
+        public Pokemon Pokemon { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
     }
@@ -226,7 +242,7 @@ namespace PokedexRazorPages.Models
     public class Sprites
     {
         public int Id { get; set; }
-        public int PokemonId { get; set; }
+        public Pokemon Pokemon { get; set; }
         public string Back_Default { get; set; }
         public string Back_Female { get; set; }
         public string Back_Shiny { get; set; }
@@ -242,7 +258,7 @@ namespace PokedexRazorPages.Models
     public class Other
     {
         public int Id { get; set; }
-        public int SpritesId { get; set; }
+        public Sprites Sprites { get; set; }
         public DreamWorld DreamWorld { get; set; }
         public Home Home { get; set; }
         public Official_Artwork Official_Artwork { get; set; }
@@ -251,7 +267,7 @@ namespace PokedexRazorPages.Models
     public class DreamWorld
     {
         public int Id { get; set; }
-        public int OtherId { get; set; }
+        public Other Other { get; set; }
         public string Front_Default { get; set; }
         public string Front_Female { get; set; }
     }
@@ -259,7 +275,7 @@ namespace PokedexRazorPages.Models
     public class Home
     {
         public int Id { get; set; }
-        public int OtherId { get; set; }
+        public Other Other { get; set; }
         public string Front_Default { get; set; }
         public string Front_Female { get; set; }
         public string Front_Shiny { get; set; }
@@ -269,14 +285,14 @@ namespace PokedexRazorPages.Models
     public class Official_Artwork 
     {
         public int Id { get; set; }
-        public int OtherId { get; set; }
+        public Other Other { get; set; }
         public string Front_Default { get; set; }
     }
 
     public class Versions
     {
         public int Id { get; set; }
-        public int SpritesId { get; set; }
+        public Sprites Sprites { get; set; }
         public Generation_i Generation_i { get; set; }
         public Generation_ii Generation_ii { get; set; }
         public Generation_iii Generation_iii { get; set; }
@@ -290,7 +306,7 @@ namespace PokedexRazorPages.Models
     public class Generation_i 
     {
         public int Id { get; set; }
-        public int VersionsId { get; set; }
+        public Versions Versions { get; set; }
         public Red_Blue Red_Blue { get; set; }
         public Yellow Yellow { get; set; }
     }
@@ -298,7 +314,7 @@ namespace PokedexRazorPages.Models
     public class Red_Blue 
     {
         public int Id { get; set; }
-        public int Generation_iId { get; set; }
+        public Generation_i Generation_i { get; set; }
         public string Back_Default { get; set; }
         public string Back_Gray { get; set; }
         public string Front_Default { get; set; }
@@ -308,7 +324,7 @@ namespace PokedexRazorPages.Models
     public class Yellow 
     {
         public int Id { get; set; }
-        public int Generation_iId { get; set; }
+        public Generation_i Generation_i { get; set; }
         public string Back_Default { get; set; }
         public string Back_Gray { get; set; }
         public string Front_Default { get; set; }
@@ -318,7 +334,7 @@ namespace PokedexRazorPages.Models
     public class Generation_ii
     {
         public int Id { get; set; }
-        public int VersionsId { get; set; }
+        public Versions Versions { get; set; }
         public Crystal Crystal { get; set; }
         public Gold Gold { get; set; }
         public Silver Silver { get; set; }
@@ -327,7 +343,7 @@ namespace PokedexRazorPages.Models
     public class Crystal
     {
         public int Id { get; set; }
-        public int Generation_iiId { get; set; }
+        public Generation_ii Generation_ii { get; set; }
         public string Back_Default { get; set; }
         public string Back_Shiny { get; set; }
         public string Front_Default { get; set; }
@@ -337,7 +353,7 @@ namespace PokedexRazorPages.Models
     public class Gold
     {
         public int Id { get; set; }
-        public int Generation_iiId { get; set; }
+        public Generation_ii Generation_ii { get; set; }
         public string Back_Default { get; set; }
         public string Back_Shiny { get; set; }
         public string Front_Default { get; set; }
@@ -347,7 +363,7 @@ namespace PokedexRazorPages.Models
     public class Silver
     {
         public int Id { get; set; }
-        public int Generation_iiId { get; set; }
+        public Generation_ii Generation_ii { get; set; }
         public string Back_Default { get; set; }
         public string Back_Shiny { get; set; }
         public string Front_Default { get; set; }
@@ -357,7 +373,7 @@ namespace PokedexRazorPages.Models
     public class Generation_iii
     {
         public int Id { get; set; }
-        public int VersionsId { get; set; }
+        public Versions Versions { get; set; }
         public Emerald Emerald { get; set; }
         public Firered_Leafgreen Firered_Leafgreen { get; set; }
         public Ruby_Sapphire Ruby_Sapphire { get; set; }
@@ -366,7 +382,7 @@ namespace PokedexRazorPages.Models
     public class Emerald
     {
         public int Id { get; set; }
-        public int Generation_iiiId { get; set; }
+        public Generation_iii Generation_iii { get; set; }
         public string Front_Default { get; set; }
         public string Front_Shiny { get; set; }
     }
@@ -374,7 +390,7 @@ namespace PokedexRazorPages.Models
     public class Firered_Leafgreen
     {
         public int Id { get; set; }
-        public int Generation_iiiId { get; set; }
+        public Generation_iii Generation_iii { get; set; }
         public string Back_Default { get; set; }
         public string Back_Shiny { get; set; }
         public string Front_Default { get; set; }
@@ -384,7 +400,7 @@ namespace PokedexRazorPages.Models
     public class Ruby_Sapphire
     {
         public int Id { get; set; }
-        public int Generation_iiiId { get; set; }
+        public Generation_iii Generation_iii { get; set; }
         public string Back_Default { get; set; }
         public string Back_Shiny { get; set; }
         public string Front_Default { get; set; }
@@ -394,7 +410,7 @@ namespace PokedexRazorPages.Models
     public class Generation_iv
     {
         public int Id { get; set; }
-        public int VersionsId { get; set; }
+        public Versions Versions { get; set; }
         public Diamond_Pearl Diamond_Pearl { get; set; }
         public Heartgold_Soulsilver Heartgold_Soulsilver { get; set; }
         public Platinum Platinum { get; set; }
@@ -403,7 +419,7 @@ namespace PokedexRazorPages.Models
     public class Diamond_Pearl
     {
         public int Id { get; set; }
-        public int Generation_ivId { get; set; }
+        public Generation_iv Generation_iv { get; set; }
         public string Back_Default { get; set; }
         public string Back_Female { get; set; }
         public string Back_Shiny { get; set; }
@@ -417,7 +433,7 @@ namespace PokedexRazorPages.Models
     public class Heartgold_Soulsilver
     {
         public int Id { get; set; }
-        public int Generation_ivId { get; set; }
+        public Generation_iv Generation_iv { get; set; }
         public string Back_Default { get; set; }
         public string Back_Female { get; set; }
         public string Back_Shiny { get; set; }
@@ -431,7 +447,7 @@ namespace PokedexRazorPages.Models
     public class Platinum
     {
         public int Id { get; set; }
-        public int Generation_ivId { get; set; }
+        public Generation_iv Generation_iv { get; set; }
         public string Back_Default { get; set; }
         public string Back_Female { get; set; }
         public string Back_Shiny { get; set; }
@@ -445,10 +461,10 @@ namespace PokedexRazorPages.Models
     public class Generation_v
     {
         public int Id { get; set; }
-        public int VersionsId { get; set; }
+        public Versions Versions { get; set; }
         public Black_White Black_White { get; set; }
     }
-
+    //TODO KEEP CONNECTIONG TABLES
     public class Black_White
     {
         public int Id { get; set; }
