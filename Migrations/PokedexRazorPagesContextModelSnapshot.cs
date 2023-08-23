@@ -66,8 +66,7 @@ namespace PokedexRazorPages.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AbilitiesId")
-                        .IsUnique();
+                    b.HasIndex("AbilitiesId");
 
                     b.ToTable("Ability");
                 });
@@ -370,6 +369,8 @@ namespace PokedexRazorPages.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PokemonId");
+
                     b.ToTable("Forms");
                 });
 
@@ -388,6 +389,8 @@ namespace PokedexRazorPages.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
 
                     b.ToTable("GameIndices");
                 });
@@ -541,15 +544,10 @@ namespace PokedexRazorPages.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IconsId")
-                        .HasColumnType("int");
-
                     b.Property<int>("VersionsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IconsId");
 
                     b.HasIndex("VersionsId")
                         .IsUnique();
@@ -565,15 +563,10 @@ namespace PokedexRazorPages.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IconsId")
-                        .HasColumnType("int");
-
                     b.Property<int>("VersionsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IconsId");
 
                     b.HasIndex("VersionsId")
                         .IsUnique();
@@ -667,7 +660,7 @@ namespace PokedexRazorPages.Migrations
                     b.ToTable("HeartgoldSoulsilver");
                 });
 
-            modelBuilder.Entity("PokedexRazorPages.Models.Held_Item", b =>
+            modelBuilder.Entity("PokedexRazorPages.Models.Held_Items", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -679,6 +672,8 @@ namespace PokedexRazorPages.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
 
                     b.ToTable("HeldItems");
                 });
@@ -718,7 +713,7 @@ namespace PokedexRazorPages.Migrations
                     b.ToTable("Home");
                 });
 
-            modelBuilder.Entity("PokedexRazorPages.Models.Icons", b =>
+            modelBuilder.Entity("PokedexRazorPages.Models.Icons_vii", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -734,12 +729,42 @@ namespace PokedexRazorPages.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GenerationId")
+                    b.Property<int>("Generation_viiId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Icons");
+                    b.HasIndex("Generation_viiId")
+                        .IsUnique();
+
+                    b.ToTable("Icons_vii");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Icons_viii", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Front_Default")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Front_Female")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Generation_viiiId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Generation_viiiId")
+                        .IsUnique();
+
+                    b.ToTable("Icons_viii");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Item", b =>
@@ -750,7 +775,7 @@ namespace PokedexRazorPages.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Held_ItemId")
+                    b.Property<int>("Held_ItemsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -763,10 +788,37 @@ namespace PokedexRazorPages.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Held_ItemId")
+                    b.HasIndex("Held_ItemsId")
                         .IsUnique();
 
                     b.ToTable("Item");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.ItemVersion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Version_DetailsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Version_DetailsId")
+                        .IsUnique();
+
+                    b.ToTable("ItemVersion");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Move", b =>
@@ -835,6 +887,8 @@ namespace PokedexRazorPages.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
 
                     b.ToTable("Moves");
                 });
@@ -931,6 +985,8 @@ namespace PokedexRazorPages.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
 
                     b.HasIndex("TypesId");
 
@@ -1169,6 +1225,9 @@ namespace PokedexRazorPages.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PokemonId")
+                        .IsUnique();
+
                     b.ToTable("Species");
                 });
 
@@ -1217,6 +1276,9 @@ namespace PokedexRazorPages.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PokemonId")
+                        .IsUnique();
+
                     b.ToTable("Sprites");
                 });
 
@@ -1264,7 +1326,12 @@ namespace PokedexRazorPages.Migrations
                     b.Property<int>("PokemonId")
                         .HasColumnType("int");
 
+                    b.Property<int>("PokemondId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
 
                     b.ToTable("Stats");
                 });
@@ -1311,6 +1378,8 @@ namespace PokedexRazorPages.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PokemonId");
 
                     b.ToTable("Types");
                 });
@@ -1385,21 +1454,15 @@ namespace PokedexRazorPages.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Held_ItemId")
+                    b.Property<int>("Held_ItemsId")
                         .HasColumnType("int");
 
                     b.Property<int>("Rarity")
                         .HasColumnType("int");
 
-                    b.Property<int>("VersionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("Held_ItemId")
-                        .IsUnique();
-
-                    b.HasIndex("VersionId");
+                    b.HasIndex("Held_ItemsId");
 
                     b.ToTable("VersionDetails");
                 });
@@ -1448,8 +1511,7 @@ namespace PokedexRazorPages.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovesId")
-                        .IsUnique();
+                    b.HasIndex("MovesId");
 
                     b.ToTable("VersionGroupDetails");
                 });
@@ -1556,403 +1618,587 @@ namespace PokedexRazorPages.Migrations
 
             modelBuilder.Entity("PokedexRazorPages.Models.Ability", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Abilities", null)
-                        .WithOne("Ability")
-                        .HasForeignKey("PokedexRazorPages.Models.Ability", "AbilitiesId")
+                    b.HasOne("PokedexRazorPages.Models.Abilities", "Abilities")
+                        .WithMany("Abilitys")
+                        .HasForeignKey("AbilitiesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Abilities");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Animated", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Black_White", null)
+                    b.HasOne("PokedexRazorPages.Models.Black_White", "Black_White")
                         .WithOne("Animated")
                         .HasForeignKey("PokedexRazorPages.Models.Animated", "Black_WhiteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Black_White");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Black_White", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_v", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_v", "Generation_v")
                         .WithOne("Black_White")
                         .HasForeignKey("PokedexRazorPages.Models.Black_White", "Generation_vId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_v");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Crystal", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_ii", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_ii", "Generation_ii")
                         .WithOne("Crystal")
                         .HasForeignKey("PokedexRazorPages.Models.Crystal", "Generation_iiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_ii");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Diamond_Pearl", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_iv", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_iv", "Generation_iv")
                         .WithOne("Diamond_Pearl")
                         .HasForeignKey("PokedexRazorPages.Models.Diamond_Pearl", "Generation_ivId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_iv");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.DreamWorld", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Other", null)
+                    b.HasOne("PokedexRazorPages.Models.Other", "Other")
                         .WithOne("DreamWorld")
                         .HasForeignKey("PokedexRazorPages.Models.DreamWorld", "OtherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Other");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Emerald", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_iii", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_iii", "Generation_iii")
                         .WithOne("Emerald")
                         .HasForeignKey("PokedexRazorPages.Models.Emerald", "Generation_iiiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_iii");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Firered_Leafgreen", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_iii", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_iii", "Generation_iii")
                         .WithOne("Firered_Leafgreen")
                         .HasForeignKey("PokedexRazorPages.Models.Firered_Leafgreen", "Generation_iiiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_iii");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Forms", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithMany("Forms")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Game_Indices", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithMany("Game_Indices")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.PastTypes", null)
+                    b.HasOne("PokedexRazorPages.Models.PastTypes", "PastTypes")
                         .WithOne("Generation")
                         .HasForeignKey("PokedexRazorPages.Models.Generation", "PastTypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("PastTypes");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_i", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_i")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_i", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_ii", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_ii")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_ii", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_iii", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_iii")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_iii", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_iv", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_iv")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_iv", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_v", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_v")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_v", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_vi", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_vi")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_vi", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_vii", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Icons", "Icons")
-                        .WithMany()
-                        .HasForeignKey("IconsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_vii")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_vii", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Icons");
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_viii", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Icons", "Icons")
-                        .WithMany()
-                        .HasForeignKey("IconsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PokedexRazorPages.Models.Versions", null)
+                    b.HasOne("PokedexRazorPages.Models.Versions", "Versions")
                         .WithOne("Generation_viii")
                         .HasForeignKey("PokedexRazorPages.Models.Generation_viii", "VersionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Icons");
+                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Gold", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_ii", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_ii", "Generation_ii")
                         .WithOne("Gold")
                         .HasForeignKey("PokedexRazorPages.Models.Gold", "Generation_iiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_ii");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Heartgold_Soulsilver", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_iv", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_iv", "Generation_iv")
                         .WithOne("Heartgold_Soulsilver")
                         .HasForeignKey("PokedexRazorPages.Models.Heartgold_Soulsilver", "Generation_ivId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_iv");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Held_Items", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithMany("Held_Items")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Home", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Other", null)
+                    b.HasOne("PokedexRazorPages.Models.Other", "Other")
                         .WithOne("Home")
                         .HasForeignKey("PokedexRazorPages.Models.Home", "OtherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Other");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Icons_vii", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Generation_vii", "Generation_vii")
+                        .WithOne("Icons_vii")
+                        .HasForeignKey("PokedexRazorPages.Models.Icons_vii", "Generation_viiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Generation_vii");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Icons_viii", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Generation_viii", "Generation_viii")
+                        .WithOne("Icons_viii")
+                        .HasForeignKey("PokedexRazorPages.Models.Icons_viii", "Generation_viiiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Generation_viii");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Item", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Held_Item", null)
+                    b.HasOne("PokedexRazorPages.Models.Held_Items", "Held_Items")
                         .WithOne("Item")
-                        .HasForeignKey("PokedexRazorPages.Models.Item", "Held_ItemId")
+                        .HasForeignKey("PokedexRazorPages.Models.Item", "Held_ItemsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Held_Items");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.ItemVersion", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Version_Details", "Version_Details")
+                        .WithOne("ItemVersion")
+                        .HasForeignKey("PokedexRazorPages.Models.ItemVersion", "Version_DetailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Version_Details");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Move", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Moves", null)
+                    b.HasOne("PokedexRazorPages.Models.Moves", "Moves")
                         .WithOne("Move")
                         .HasForeignKey("PokedexRazorPages.Models.Move", "MovesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Moves");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Move_Learn_Method", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Version_Group_Details", null)
+                    b.HasOne("PokedexRazorPages.Models.Version_Group_Details", "Version_Group_Details")
                         .WithOne("Move_Learn_Method")
                         .HasForeignKey("PokedexRazorPages.Models.Move_Learn_Method", "Version_Group_DetailsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Version_Group_Details");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Moves", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithMany("Moves")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Official_Artwork", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Other", null)
+                    b.HasOne("PokedexRazorPages.Models.Other", "Other")
                         .WithOne("Official_Artwork")
                         .HasForeignKey("PokedexRazorPages.Models.Official_Artwork", "OtherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Other");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Omegaruby_Alphasapphire", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_vi", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_vi", "Generation_vi")
                         .WithOne("Omegaruby_Alphasapphire")
                         .HasForeignKey("PokedexRazorPages.Models.Omegaruby_Alphasapphire", "Generation_viId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_vi");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Other", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Sprites", null)
+                    b.HasOne("PokedexRazorPages.Models.Sprites", "Sprites")
                         .WithOne("Other")
                         .HasForeignKey("PokedexRazorPages.Models.Other", "SpritesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Sprites");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.PastTypes", b =>
                 {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithMany("PastTypes")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PokedexRazorPages.Models.Types", "Types")
                         .WithMany()
                         .HasForeignKey("TypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Pokemon");
+
                     b.Navigation("Types");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Platinum", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_iv", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_iv", "Generation_iv")
                         .WithOne("Platinum")
                         .HasForeignKey("PokedexRazorPages.Models.Platinum", "Generation_ivId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_iv");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Red_Blue", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_i", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_i", "Generation_i")
                         .WithOne("Red_Blue")
                         .HasForeignKey("PokedexRazorPages.Models.Red_Blue", "Generation_iId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_i");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Ruby_Sapphire", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_iii", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_iii", "Generation_iii")
                         .WithOne("Ruby_Sapphire")
                         .HasForeignKey("PokedexRazorPages.Models.Ruby_Sapphire", "Generation_iiiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_iii");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Silver", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_ii", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_ii", "Generation_ii")
                         .WithOne("Silver")
                         .HasForeignKey("PokedexRazorPages.Models.Silver", "Generation_iiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_ii");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Species", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithOne("Species")
+                        .HasForeignKey("PokedexRazorPages.Models.Species", "PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Sprites", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithOne("Sprites")
+                        .HasForeignKey("PokedexRazorPages.Models.Sprites", "PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Stat", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Stats", null)
+                    b.HasOne("PokedexRazorPages.Models.Stats", "Stats")
                         .WithOne("Stat")
                         .HasForeignKey("PokedexRazorPages.Models.Stat", "StatsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Stats");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Stats", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithMany("Stats")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Type", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Types", null)
+                    b.HasOne("PokedexRazorPages.Models.Types", "Types")
                         .WithOne("Type")
                         .HasForeignKey("PokedexRazorPages.Models.Type", "TypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Types");
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Types", b =>
+                {
+                    b.HasOne("PokedexRazorPages.Models.Pokemon", "Pokemon")
+                        .WithMany("Types")
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pokemon");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Ultra_Sun_Ultra_Moon", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_vii", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_vii", "Generation_vii")
                         .WithOne("Ultra_Sun_Ultra_Moon")
                         .HasForeignKey("PokedexRazorPages.Models.Ultra_Sun_Ultra_Moon", "Generation_viiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_vii");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Version", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Game_Indices", null)
+                    b.HasOne("PokedexRazorPages.Models.Game_Indices", "Game_Indices")
                         .WithOne("Version")
                         .HasForeignKey("PokedexRazorPages.Models.Version", "Game_IndicesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Game_Indices");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Version_Details", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Held_Item", null)
-                        .WithOne("Version_Details")
-                        .HasForeignKey("PokedexRazorPages.Models.Version_Details", "Held_ItemId")
+                    b.HasOne("PokedexRazorPages.Models.Held_Items", "Held_Items")
+                        .WithMany("Version_Details")
+                        .HasForeignKey("Held_ItemsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PokedexRazorPages.Models.Version", "Version")
-                        .WithMany()
-                        .HasForeignKey("VersionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Version");
+                    b.Navigation("Held_Items");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Version_Group", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Version_Group_Details", null)
+                    b.HasOne("PokedexRazorPages.Models.Version_Group_Details", "Version_Group_Details")
                         .WithOne("Version_Group")
                         .HasForeignKey("PokedexRazorPages.Models.Version_Group", "Version_Group_DetailsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Version_Group_Details");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Version_Group_Details", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Moves", null)
-                        .WithOne("Version_Group_Details")
-                        .HasForeignKey("PokedexRazorPages.Models.Version_Group_Details", "MovesId")
+                    b.HasOne("PokedexRazorPages.Models.Moves", "Moves")
+                        .WithMany("Version_Group_Details")
+                        .HasForeignKey("MovesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Moves");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Versions", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Sprites", null)
+                    b.HasOne("PokedexRazorPages.Models.Sprites", "Sprites")
                         .WithOne("Versions")
                         .HasForeignKey("PokedexRazorPages.Models.Versions", "SpritesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Sprites");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.X_Y", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_vi", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_vi", "Generation_vi")
                         .WithOne("X_Y")
                         .HasForeignKey("PokedexRazorPages.Models.X_Y", "Generation_viId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_vi");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Yellow", b =>
                 {
-                    b.HasOne("PokedexRazorPages.Models.Generation_i", null)
+                    b.HasOne("PokedexRazorPages.Models.Generation_i", "Generation_i")
                         .WithOne("Yellow")
                         .HasForeignKey("PokedexRazorPages.Models.Yellow", "Generation_iId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Generation_i");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Abilities", b =>
                 {
-                    b.Navigation("Ability")
-                        .IsRequired();
+                    b.Navigation("Abilitys");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Black_White", b =>
@@ -2029,17 +2275,25 @@ namespace PokedexRazorPages.Migrations
 
             modelBuilder.Entity("PokedexRazorPages.Models.Generation_vii", b =>
                 {
+                    b.Navigation("Icons_vii")
+                        .IsRequired();
+
                     b.Navigation("Ultra_Sun_Ultra_Moon")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PokedexRazorPages.Models.Held_Item", b =>
+            modelBuilder.Entity("PokedexRazorPages.Models.Generation_viii", b =>
+                {
+                    b.Navigation("Icons_viii")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Held_Items", b =>
                 {
                     b.Navigation("Item")
                         .IsRequired();
 
-                    b.Navigation("Version_Details")
-                        .IsRequired();
+                    b.Navigation("Version_Details");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Moves", b =>
@@ -2047,8 +2301,7 @@ namespace PokedexRazorPages.Migrations
                     b.Navigation("Move")
                         .IsRequired();
 
-                    b.Navigation("Version_Group_Details")
-                        .IsRequired();
+                    b.Navigation("Version_Group_Details");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Other", b =>
@@ -2072,6 +2325,26 @@ namespace PokedexRazorPages.Migrations
             modelBuilder.Entity("PokedexRazorPages.Models.Pokemon", b =>
                 {
                     b.Navigation("Abilities");
+
+                    b.Navigation("Forms");
+
+                    b.Navigation("Game_Indices");
+
+                    b.Navigation("Held_Items");
+
+                    b.Navigation("Moves");
+
+                    b.Navigation("PastTypes");
+
+                    b.Navigation("Species")
+                        .IsRequired();
+
+                    b.Navigation("Sprites")
+                        .IsRequired();
+
+                    b.Navigation("Stats");
+
+                    b.Navigation("Types");
                 });
 
             modelBuilder.Entity("PokedexRazorPages.Models.Sprites", b =>
@@ -2092,6 +2365,12 @@ namespace PokedexRazorPages.Migrations
             modelBuilder.Entity("PokedexRazorPages.Models.Types", b =>
                 {
                     b.Navigation("Type")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PokedexRazorPages.Models.Version_Details", b =>
+                {
+                    b.Navigation("ItemVersion")
                         .IsRequired();
                 });
 

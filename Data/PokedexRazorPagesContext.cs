@@ -21,7 +21,7 @@ namespace PokedexRazorPages.Data
         public DbSet<Forms> Forms { get; set; }
         public DbSet<Game_Indices> GameIndices { get; set; }
         public DbSet<Models.Version> Version { get; set; }
-        public DbSet<Held_Item> HeldItems { get; set; }
+        public DbSet<Held_Items> HeldItems { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<Version_Details> VersionDetails { get; set; }
         public DbSet<Moves> Moves { get; set; }
@@ -65,10 +65,11 @@ namespace PokedexRazorPages.Data
         public DbSet<X_Y> XYs { get; set; }
 
         public DbSet<Generation_vii> GenerationVII { get; set; }
-        public DbSet<Icons> Icons { get; set; }
+        public DbSet<Icons_vii> Icons_vii { get; set; }
         public DbSet<Ultra_Sun_Ultra_Moon> UltraSunUltraMoon { get; set; }
 
         public DbSet<Generation_viii> GenerationVIII { get; set; }
+        public DbSet<Icons_viii> Icons_viii { get; set; }
 
         public DbSet<Stats> Stats { get; set; }
         public DbSet<Stat> Stat { get; set; }
@@ -80,5 +81,15 @@ namespace PokedexRazorPages.Data
         public DbSet<Generation> Generation { get; set; }
 
         public DbSet<PokedexRazorPages.Models.Rating> Rating { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Abilities>()
+                .HasMany(e => e.Abilitys)
+                .WithOne(e => e.Abilities)
+                .HasForeignKey(e => e.AbilitiesId)
+                .IsRequired();
+        }
     }
 }
